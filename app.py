@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Carga el archivo Excel donde la información de las ventas está en la hoja 'Salidas'
@@ -68,6 +69,38 @@ ventas_richard = ventas_totales[ventas_totales['observaciones'].str.contains('ri
 
 print("Ventas con la palabra 'richard' en las observaciones:")
 print(ventas_richard)
+
+
+# Ventas por Bebida
+ventas_totales_por_bebida = ventas_totales.groupby('bebida').agg({'importe': 'sum'})
+print("Ventas totales por bebida:", ventas_totales_por_bebida)
+
+# Gráfico de barras
+plt.bar(ventas_totales_por_bebida.index, ventas_totales_por_bebida['importe'])
+plt.title('Ventas por Bebida')
+plt.xlabel('Bebida')
+plt.ylabel('Importe')
+plt.xticks(rotation=45)
+plt.show()
+
+
+# Gráfico de pastel
+plt.pie(ventas_totales_por_bebida['importe'], labels=ventas_totales_por_bebida.index, autopct='%1.1f%%')
+plt.title('Ventas por Bebida')
+plt.show()
+
+
+
+ventas_richard = ventas_totales[ventas_totales['observaciones'].str.contains('richard', case=False, na=False)]
+ventas_richard_por_bebida = ventas_richard.groupby('bebida').agg({'importe': 'sum'})
+
+# Gráfico de barras
+plt.bar(ventas_richard_por_bebida.index, ventas_richard_por_bebida['importe'])
+plt.title("Ventas con la palabra 'richard' en las observaciones")
+plt.xlabel('Bebida')
+plt.ylabel('Importe')
+plt.xticks(rotation=45)
+plt.show()
 
 
 """# Si es necesario, puedes cargar también la información de precios y stock de las bebidas
