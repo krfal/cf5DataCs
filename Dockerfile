@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt .
 
+# Instala las dependencias
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential \
@@ -14,8 +15,5 @@ RUN apt-get update \
 # Copia el código y los archivos necesarios al contenedor
 COPY . /app
 
-# Instala las dependencias
-
-
 # Ejecuta el comando por defecto para iniciar la aplicación
-CMD ["python", "-u", "app.py"]
+CMD ["python", "-u", "main.py"]
