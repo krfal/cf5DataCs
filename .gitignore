@@ -1,0 +1,6 @@
+# Ignorar directorio de entorno virtual
+venv
+
+# Ignorar subdirectorios del directorio de ArchivosExcel
+ArchivosExcel/*/
+
